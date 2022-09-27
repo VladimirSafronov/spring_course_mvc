@@ -1,6 +1,8 @@
 package com.zaurtregulov.spring.mvc;
 
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -16,13 +18,26 @@ public class MyController {
     return "first-view";
   }
 
-  @RequestMapping("askDetails")
+  @RequestMapping("/askDetails")
   public String askEmployeeDetails() {
     return "ask-emp-details-view";
   }
 
-  @RequestMapping("showDetails")
-  public String showEmployeeDetails() {
+//  @RequestMapping("/showDetails")
+//  public String showEmployeeDetails() {
+//    return "show-emp-details-view";
+//  }
+
+  @RequestMapping("/showDetails")
+  public String showEmployeeDetails(HttpServletRequest request, Model model) {
+
+    String empName = request.getParameter("employeeName");
+    empName = "Mr. " + empName;
+    model.addAttribute("nameAttribute", empName); // добавление параметров в модель: первое значение имя
+    // аттрибута, второй - его значение. И уже во view, можно обратиться к значению аттрибута по имени.
+
+    model.addAttribute("description", " - udemy instructor");
+
     return "show-emp-details-view";
   }
 }
