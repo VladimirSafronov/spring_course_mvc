@@ -6,8 +6,10 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -31,7 +33,10 @@ public class MyController {
     return "ask-emp-details-view";
   }
 
-  @RequestMapping("/showDetails")
+  //в @RequestMapping мы указываем путь к методу и с каким типом запроса он работает
+  //правильным будет изменить аннотацию на @GetMapping (для запроса POST - @PostMapping
+//  @RequestMapping(path="/showDetails", method = RequestMethod.GET)
+  @GetMapping("/showDetails")
   public String showEmployeeDetails(@Valid @ModelAttribute("employee") Employee emp,
       BindingResult bindingResult) {
 
